@@ -1,7 +1,6 @@
 package com.myeverydaybaby.models;
 
 public class Baby {
-
     private Long id;
     private String name;
     private Long birthday;

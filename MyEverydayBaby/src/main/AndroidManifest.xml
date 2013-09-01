@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="14"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="17" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +21,11 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.myeverydaybaby.DashboardActivity"
+            android:label="@string/title_activity_dashboard" >
+
         </activity>
     </application>
 

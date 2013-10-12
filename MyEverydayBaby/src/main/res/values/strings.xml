@@ -14,6 +14,9 @@
     <string name="from_gallery">Gallery</string>
     <string name="from_camera">Camera</string>
     <string name="not_available">not available</string>
-    <string name="title_activity_welcome">Welcome</string><string name="get_started">Get Started</string>
+    <string name="title_activity_welcome">Welcome</string>
+    <string name="get_started">Get Started</string>
+    <string name="error_field_required">This is a required field</string>
+    <string name="album_name">myEveryDayBabyAlbum</string>
 
 </resources>

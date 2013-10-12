@@ -8,11 +8,10 @@ import android.database.sqlite.SQLiteDatabase;
 import com.myeverydaybaby.exceptions.EntityNotFoundException;
 import com.myeverydaybaby.models.Baby;
 
-import org.w3c.dom.Comment;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
 import static com.myeverydaybaby.persistence.EveryDayBabyContract.Babies;
 
 public class BabyDAO {
@@ -72,6 +71,7 @@ public class BabyDAO {
             while (!c.isAfterLast()){
                 Baby baby = getBabyFromCursor(c);
                 babyList.add(baby);
+                c.moveToNext();
             }
         } finally {
             c.close();

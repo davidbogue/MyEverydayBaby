@@ -1,39 +1,37 @@
 package com.myeverydaybaby.fragments;
 
 import android.app.Fragment;
-import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.myeverydaybaby.DashboardActivity;
 import com.myeverydaybaby.R;
+import com.myeverydaybaby.WelcomeActivity;
 import com.myeverydaybaby.models.Baby;
+import com.myeverydaybaby.persistence.BabyDAO;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public class SplashScreenFragment extends Fragment {
 
-    private LoadBabyTask loadBabyTask = null;
-    private Activity parentActivity = null;
+
+    private LoadBabyTask loadBabyTask;
+    private BabyDAO babyDAO;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        parentActivity = getActivity();
+        babyDAO = new BabyDAO(getActivity());
+        loadBabyData();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // temporary 5 second pause... remove this later
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                loadBabyData();
-            }
-        }, 5000);
         return inflater.inflate(R.layout.splash_screen, container, false);
     }
 
@@ -52,19 +50,21 @@ public class SplashScreenFragment extends Fragment {
     public class LoadBabyTask extends AsyncTask<Void, Void, Baby> {
         @Override
         protected Baby doInBackground(Void... params) {
+            Baby baby = null;
             try {
-                // TODO use DB helper to return baby
-                Baby baby = new Baby();
-                baby.setName("Test Baby");
-                baby.setId(1l);
-                baby.setBirthday(123l);
+                babyDAO.open();
+                List<Baby> babies = babyDAO.getBabies();
 
-
-                return baby;
-            }catch (Exception e) {
-                // authentication failed
+                if( babies != null && !babies.isEmpty() ){
+                    // TODO add preference to determine which baby to return (or maybe logic for the last visible baby)
+                    baby = babies.get(0);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }finally {
+                babyDAO.close();
             }
-            return null;
+            return baby;
         }
 
         @Override
@@ -72,12 +72,13 @@ public class SplashScreenFragment extends Fragment {
             loadBabyTask = null;
 
             if (baby != null) {
-                Intent intent = new Intent(parentActivity, DashboardActivity.class);
+                Intent intent = new Intent(getActivity(), DashboardActivity.class);
                 startActivity(intent);
-                parentActivity.finish();
+                getActivity().finish();
             } else {
-                //show welcome activity
-//                finish();
+                Intent intent = new Intent(getActivity(), WelcomeActivity.class);
+                startActivity(intent);
+                getActivity().finish();
             }
         }
 

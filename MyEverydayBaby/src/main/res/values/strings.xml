@@ -1,9 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">My Everyday Baby</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello from My Everyday Baby!</string>
     <string name="title_activity_dashboard">Dashboard</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="hi">Hi.</string>
+    <string name="before_we_begin">Tell us about your baby.</string>
+    <string name="name">Name</string>
+    <string name="birthday">Birthday</string>
+    <string name="from_gallery">Gallery</string>
+    <string name="from_camera">Camera</string>
+    <string name="not_available">not available</string>
+    <string name="title_activity_welcome">Welcome</string><string name="get_started">Get Started</string>
+
 </resources>

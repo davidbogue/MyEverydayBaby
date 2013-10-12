@@ -3,6 +3,7 @@ package com.myeverydaybaby;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -109,15 +110,6 @@ public class DashboardActivity extends Activity {
         // Handle action buttons
         switch(item.getItemId()) {
 //            case R.id.action_websearch:
-//                // create intent to perform web search for this planet
-//                Intent intent = new Intent(Intent.ACTION_WEB_SEARCH);
-//                intent.putExtra(SearchManager.QUERY, getActionBar().getTitle());
-//                // catch event that there's no activity to handle intent
-//                if (intent.resolveActivity(getPackageManager()) != null) {
-//                    startActivity(intent);
-//                } else {
-//                    Toast.makeText(this, R.string.app_not_available, Toast.LENGTH_LONG).show();
-//                }
 //                return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -135,7 +127,10 @@ public class DashboardActivity extends Activity {
     private void selectItem(int position) {
         FragmentManager fragmentManager = getFragmentManager();
         Fragment fragment = navigationFragmentFactory.getNavigationFragment(position);
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.content_frame, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
         mDrawerLayout.closeDrawer(mDrawerList);
     }
 

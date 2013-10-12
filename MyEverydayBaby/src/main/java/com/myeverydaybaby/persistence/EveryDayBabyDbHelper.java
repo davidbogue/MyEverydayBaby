@@ -1,13 +1,8 @@
 package com.myeverydaybaby.persistence;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.myeverydaybaby.models.Baby;
-
-import java.util.List;
 
 /**
  * Created by David on 7/19/13.
@@ -29,10 +24,6 @@ public class EveryDayBabyDbHelper extends SQLiteOpenHelper {
        db.execSQL( EveryDayBabyContract.SQL_CREATE_SLEEP );
        db.execSQL( EveryDayBabyContract.SQL_CREATE_STATISTICS );
 
-       // Insert default baby
-        ContentValues values = new ContentValues();
-        values.put( EveryDayBabyContract.Babies.COLUMN_NAME_NAME, "My Baby");
-        db.insert(EveryDayBabyContract.Babies.TABLE_NAME, EveryDayBabyContract.Babies.COLUMN_NAME_PICTURE, values );
     }
 
     @Override
